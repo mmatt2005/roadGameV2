@@ -1,8 +1,8 @@
 import { Line } from "./line";
-import { lineManager, pointManager } from "./main";
+import { lineManager, player, pointManager } from "./main";
 import { Point } from "./point";
 
-const MAX_POINTS = 20
+const MAX_POINTS = 50
 
 
 export function createMap(points: Point[]) {
@@ -42,17 +42,12 @@ export function createMap(points: Point[]) {
     }
 
     function wasPointGeneratedToCloseToAnother(generatedPoint: Point, closestPoint: Point): boolean {
-        console.log("--------------------")
-        console.log(generatedPoint)
-        console.log(closestPoint)
-        console.log("--------------------")
-        if (Math.abs(generatedPoint.x - closestPoint.x) < 175 && Math.abs(generatedPoint.y - closestPoint.y) < 175) {
+        if (Math.abs(generatedPoint.x - closestPoint.x) < 100 && Math.abs(generatedPoint.y - closestPoint.y) < 100) {
             return true
         }
 
         return false
     }
-
 
     if (points.length === 0) {
         const firstPoint = new Point()
@@ -74,8 +69,6 @@ export function createMap(points: Point[]) {
         )
 
         if (wasPointGeneratedToCloseToAnother(leftPoint, getClosestPoint(leftPoint))) return createMap(pointManager.points)
-
-        leftPoint.setColor("green")
         pointManager.addPoint(leftPoint)
         lineManager.addLine(new Line(selectedPoint, leftPoint))
 
@@ -85,13 +78,11 @@ export function createMap(points: Point[]) {
     } else if (direction === "right") {
         const rightPoint = new Point()
         rightPoint.setPosition(
-            generateRandomXValue(selectedPoint.x, window.innerWidth),
+            generateRandomXValue(selectedPoint.x, window.innerWidth - rightPoint.width),
             selectedPoint.y
         )
 
         if (wasPointGeneratedToCloseToAnother(rightPoint, getClosestPoint(rightPoint))) return createMap(pointManager.points)
-
-        rightPoint.setColor("red")
         lineManager.addLine(new Line(selectedPoint, rightPoint))
 
         pointManager.addPoint(rightPoint)
@@ -105,8 +96,6 @@ export function createMap(points: Point[]) {
         )
 
         if (wasPointGeneratedToCloseToAnother(topPoint, getClosestPoint(topPoint))) return createMap(pointManager.points)
-
-        topPoint.setColor("orange")
         lineManager.addLine(new Line(selectedPoint, topPoint))
 
         pointManager.addPoint(topPoint)
@@ -116,13 +105,10 @@ export function createMap(points: Point[]) {
         const bottomPoint = new Point()
         bottomPoint.setPosition(
             selectedPoint.x,
-            generateRandomYValue(selectedPoint.y, window.innerHeight)
+            generateRandomYValue(selectedPoint.y, window.innerHeight - bottomPoint.height)
         )
 
         if (wasPointGeneratedToCloseToAnother(bottomPoint, getClosestPoint(bottomPoint))) return createMap(pointManager.points)
-
-
-        bottomPoint.setColor("pink")
         lineManager.addLine(new Line(selectedPoint, bottomPoint))
         pointManager.addPoint(bottomPoint)
 

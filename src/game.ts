@@ -10,7 +10,7 @@ export class Game  {
 
     draw() {
         player.draw()
-        pointManager.draw()
         lineManager.draw()
+        pointManager.draw()
     }
 }

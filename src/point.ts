@@ -3,9 +3,9 @@ import { context } from "./main"
 export class Point { 
     x: number = 0
     y: number = 0
-    color: string = "blue"
-    width: number = 50
-    height: number = 50
+    color: string = "black"
+    width: number = 15
+    height: number = 15
 
     setPosition(x: number, y: number) {
         this.x = x
