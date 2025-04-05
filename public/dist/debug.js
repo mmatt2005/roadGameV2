@@ -1,6 +1,8 @@
 import { Call } from "./call.js";
-import { canvas, uiManager } from "./main.js";
+import { canvas, uiManager, vehicleManager } from "./main.js";
+import { getPath } from "./pathfinding.js";
 import { Point } from "./point.js";
+import { EmergencyVehicle } from "./emergencyVehicle.js";
 import { getClosestGameObject } from "./utils.js";
 export class Debug {
     constructor() {
@@ -21,6 +23,25 @@ export class Debug {
             else if (closestGameObject instanceof Point) {
                 uiManager.setUiState("point", closestGameObject);
             }
+        });
+    }
+    debug_pathfinding() {
+        if (!this.startingPoint || !this.endingPoint) {
+            console.group("Failed to debug pathfinding due to no starting or ending point");
+            return;
+        }
+        const path = getPath(this.startingPoint, this.endingPoint);
+        console.log(path);
+        const debugVehicle = new EmergencyVehicle("ems");
+        debugVehicle.setPosition(path[0].x, path[0].y);
+        debugVehicle.turnLightsOn();
+        debugVehicle.moveTo(path);
+        vehicleManager.addVehicle(debugVehicle);
+        debugVehicle.onMovingToComplete = () => {
+            debugVehicle.turnLightsOff();
+        };
+        path.forEach(point => {
+            point.setColor("yellow");
         });
     }
 }

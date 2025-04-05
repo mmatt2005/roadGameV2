@@ -1,4 +1,4 @@
-import { context } from "./main";
+import { context } from "./main.js";
 export class Vehicle {
     constructor() {
         this.x = 0;
@@ -12,30 +12,42 @@ export class Vehicle {
         this.x = x;
         this.y = y;
     }
-    moveTo(endPoint) {
-        this.movingTo = endPoint;
+    moveTo(path) {
+        this.movingTo = path;
     }
-    move(endPoint) {
-        if (this.x !== endPoint.x) {
-            if (this.x > endPoint.x) {
-                this.x -= 1;
-            }
-            else {
-                this.x += 1;
-            }
+    /** @description runs when the vehicle has reached its endingPoint */
+    onMovingToComplete() { }
+    move(targetPoint) {
+        var _a, _b;
+        console.log("Ruinning.");
+        if (((_a = this.movingTo) === null || _a === void 0 ? void 0 : _a.length) === 0) {
+            this.movingTo = null;
+            console.log("Reached final point");
+            return this.onMovingToComplete();
+        }
+        const tolerance = 1;
+        // Use tolerance because sometimes if the target is (100, 100) the vehicle will get stuck at (99, 100)
+        if ((Math.abs(this.x - targetPoint.x)) <= tolerance && Math.abs(this.y - targetPoint.y) <= tolerance) {
+            console.log("Moving to next point...");
+            console.log(this.movingTo);
+            (_b = this.movingTo) === null || _b === void 0 ? void 0 : _b.shift();
+        }
+        if (this.x > targetPoint.x) {
+            this.x -= 1;
         }
         else {
-            if (this.y > endPoint.y) {
-                this.y -= 1;
-            }
-            else {
-                this.y += 1;
-            }
+            this.x += 1;
+        }
+        if (this.y > targetPoint.y) {
+            this.y -= 1;
+        }
+        else {
+            this.y += 1;
         }
     }
     draw() {
         if (this.movingTo) {
-            this.move(this.movingTo);
+            this.move(this.movingTo[0]);
         }
         context.beginPath();
         context.arc(this.x + 6, this.y + 6, 12, 0, 2 * Math.PI);

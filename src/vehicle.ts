@@ -1,46 +1,70 @@
-import { context } from "./main"
-import { Point } from "./point"
+import { context } from "./main.js"
+import { Point } from "./point.js"
 
-export class Vehicle { 
+export class Vehicle {
     x: number = 0
     y: number = 0
     width: number = 25
     height: number = 25
-    color: string = "red" 
+    color: string = "red"
 
-    movingTo: Point | null = null
+    movingTo: Point[] | null = null
 
-    setPosition(x: number, y: number) { 
+    setPosition(x: number, y: number) {
         this.x = x
         this.y = y
     }
 
-    moveTo(endPoint: Point): void { 
-        this.movingTo = endPoint
+    moveTo(path: Point[]): void {
+        this.movingTo = path
     }
 
-    move(endPoint: Point) { 
-    if (this.x !== endPoint.x) {
-            if (this.x > endPoint.x) {
-                this.x -= 1
-            } else { 
-                this.x += 1
-            }
-        } else { 
-            if (this.y > endPoint.y) {
-                this.y -= 1
-            } else { 
-                this.y += 1
-            }
+    
+    /** @description runs when the vehicle has reached its endingPoint */
+    onMovingToComplete() {}
+
+    move(targetPoint: Point) {
+        console.log("Ruinning.")
+
+        if (this.movingTo?.length === 0) {
+            this.movingTo = null
+            console.log("Reached final point")
+
+            return this.onMovingToComplete()
         }
+
+
+        const tolerance = 1
+
+        // Use tolerance because sometimes if the target is (100, 100) the vehicle will get stuck at (99, 100)
+        if ((Math.abs(this.x - targetPoint.x)) <= tolerance && Math.abs(this.y - targetPoint.y) <= tolerance) {
+            console.log("Moving to next point...")
+            console.log(this.movingTo)
+            this.movingTo?.shift()
+
+        }
+
+
+        if (this.x > targetPoint.x) {
+            this.x -= 1
+        } else {
+            this.x += 1
+        }
+
+        if (this.y > targetPoint.y) {
+            this.y -= 1
+        } else {
+            this.y += 1
+        }
+
+
     }
 
-    draw() { 
+    draw() {
         if (this.movingTo) {
-            this.move(this.movingTo)
+            this.move(this.movingTo[0])
         }
 
-        
 
 
         context.beginPath()

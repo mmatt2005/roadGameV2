@@ -26,12 +26,12 @@ export const callManager = new CallManager()
 export const game = new Game()
 game.loop()
 
-const call = new Call()
-const { x, y } = callManager.createCallLocation()
-call.setPosition(x, y)
+// const call = new Call()
+// const { x, y } = callManager.createCallLocation()
+// call.setPosition(x, y)
 
 
-callManager.addCall(call)
+// callManager.addCall(call)
 
 export const uiManager = new UiManager()
 

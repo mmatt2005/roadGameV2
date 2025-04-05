@@ -1,5 +1,5 @@
-import { context } from "./main";
-import { Vehicle } from "./vehicle";
+import { context } from "./main.js";
+import { Vehicle } from "./vehicle.js";
 export class PoliceCar extends Vehicle {
     constructor() {
         super(...arguments);
@@ -13,7 +13,7 @@ export class PoliceCar extends Vehicle {
     }
     draw() {
         if (this.movingTo) {
-            this.move(this.movingTo);
+            this.move(this.movingTo[0]);
         }
         const centerX = this.x + 6;
         const centerY = this.y + 6;
