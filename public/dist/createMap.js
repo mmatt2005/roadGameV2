@@ -1,4 +1,4 @@
-import { MAX_MAP_POINTS } from "./constants.js";
+import { MAX_MAP_POINTS, UI_WIDTH } from "./constants.js";
 import { Line } from "./line.js";
 import { lineManager, pointManager } from "./main.js";
 import { Point } from "./point.js";
@@ -54,7 +54,7 @@ export function createMap(points) {
     }
     else if (direction === "right") {
         const rightPoint = new Point();
-        rightPoint.setPosition(generateRandomXValue(selectedPoint.x, window.innerWidth - rightPoint.width), selectedPoint.y);
+        rightPoint.setPosition(generateRandomXValue(selectedPoint.x, window.innerWidth - UI_WIDTH - rightPoint.width), selectedPoint.y);
         if (wasPointGeneratedToCloseToAnother(rightPoint, getClosestPoint(rightPoint)))
             return createMap(pointManager.points);
         lineManager.addLine(new Line(selectedPoint, rightPoint));

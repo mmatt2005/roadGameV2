@@ -1,6 +1,5 @@
 import { context } from "./main.js";
-// @ts-ignore
-import { v4 as uuidv4 } from "https://cdn.skypack.dev/uuid";
+import { uuidv4 } from "./utils.js";
 export class Point {
     constructor() {
         this.x = 0;

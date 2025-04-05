@@ -13,8 +13,8 @@ export default function Home() {
     }
   }, [canvasRef])
 
-  return <>
+  return <div className="flex">
     <canvas id="canvas" ref={canvasRef} />
     {loadedCanvas && <Main />}
-  </>
+  </div>
 }

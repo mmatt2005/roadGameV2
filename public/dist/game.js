@@ -1,4 +1,4 @@
-import { callManager, canvas, context, lineManager, player, pointManager, vehicleManager } from "./main.js";
+import { callManager, canvas, context, lineManager, pointManager, vehicleManager } from "./main.js";
 export class Game {
     loop() {
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -6,7 +6,6 @@ export class Game {
         window.requestAnimationFrame(() => this.loop());
     }
     draw() {
-        player.draw();
         lineManager.draw();
         pointManager.draw();
         vehicleManager.draw();
