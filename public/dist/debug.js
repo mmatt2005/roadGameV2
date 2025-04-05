@@ -4,6 +4,7 @@ import { getPath } from "./pathfinding.js";
 import { Point } from "./point.js";
 import { EmergencyVehicle } from "./emergencyVehicle.js";
 import { getClosestGameObject } from "./utils.js";
+import { Vehicle } from "./vehicle.js";
 export class Debug {
     constructor() {
         this.timesClicked = 0;
@@ -22,6 +23,9 @@ export class Debug {
             }
             else if (closestGameObject instanceof Point) {
                 uiManager.setUiState("point", closestGameObject);
+            }
+            else if (closestGameObject instanceof Vehicle) {
+                uiManager.setUiState("vehicle", closestGameObject);
             }
         });
     }

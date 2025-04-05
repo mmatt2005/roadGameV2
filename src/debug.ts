@@ -28,6 +28,8 @@ export class Debug {
                 uiManager.setUiState("call", closestGameObject)
             } else if (closestGameObject instanceof Point) {
                 uiManager.setUiState("point", closestGameObject)
+            } else if (closestGameObject instanceof Vehicle) {
+                uiManager.setUiState("vehicle", closestGameObject)
             }
 
         })
