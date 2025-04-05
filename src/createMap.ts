@@ -1,7 +1,7 @@
-import { MAX_MAP_POINTS } from "./constants";
-import { Line } from "./line";
-import { lineManager, pointManager } from "./main";
-import { Point } from "./point";
+import { MAX_MAP_POINTS } from "./constants.js"
+import { Line } from "./line.js"
+import { lineManager, pointManager } from "./main.js"
+import { Point } from "./point.js"
 
 
 export function getClosestPoint(startingPoint: Pick<Point, "x" | "y">): Point {

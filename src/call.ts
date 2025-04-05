@@ -1,5 +1,5 @@
-import { CALL_SIZE } from "./constants"
-import { context } from "./main"
+import { CALL_SIZE } from "./constants.js"
+import { context } from "./main.js"
 
 
 

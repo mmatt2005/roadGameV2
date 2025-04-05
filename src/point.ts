@@ -1,5 +1,7 @@
-import { context } from "./main"
-import {v4 as uuidv4} from "uuid"
+import { context } from "./main.js"
+
+// @ts-ignore
+import { v4 as uuidv4 } from "https://cdn.skypack.dev/uuid";
 
 export class Point { 
     x: number = 0

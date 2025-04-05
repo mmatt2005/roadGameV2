@@ -1,7 +1,7 @@
-import { getClosestPoint } from "./createMap";
-import { canvas } from "./main";
-import { getPath } from "./pathfinding";
-import { Point } from "./point";
+import { getClosestPoint } from "./createMap.js";
+import { canvas } from "./main.js";
+import { getPath } from "./pathfinding.js";
+import { Point } from "./point.js";
 
 export class Debug {
     timesClicked: number = 0;

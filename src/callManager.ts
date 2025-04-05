@@ -1,6 +1,6 @@
-import { Call } from "./call";
-import { lineManager } from "./main";
-import { Point } from "./point";
+import { Call } from "./call.js";
+import { lineManager } from "./main.js";
+import { Point } from "./point.js";
 
 export class CallManager {
     calls: Call[] = []

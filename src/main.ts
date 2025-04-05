@@ -1,15 +1,14 @@
-import { Call } from './call'
-import { CallManager } from './callManager'
-import { createMap } from './createMap'
-import { Debug } from './debug'
-import { Game } from './game'
-import { LineManager } from './lineManager'
-import { Player } from './player'
-import { PointManager } from './pointManager'
-import { VehicleManager } from './vehicleManager'
+import { Call } from './call.js'
+import { CallManager } from './callManager.js'
+import { createMap } from './createMap.js'
+import { Debug } from './debug.js'
+import { Game } from './game.js'
+import { LineManager } from './lineManager.js'
+import { Player } from './player.js'
+import { PointManager } from './pointManager.js'
+import { VehicleManager } from './vehicleManager.js'
 
 export const canvas = document.querySelector("canvas")!
-console.log(document)
 export const context = canvas.getContext("2d")!
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight

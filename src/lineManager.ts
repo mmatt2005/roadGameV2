@@ -1,4 +1,4 @@
-import { Line } from "./line";
+import { Line } from "./line.js";
 
 export class LineManager {
     lines: Line[] = []

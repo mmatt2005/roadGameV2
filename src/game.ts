@@ -1,4 +1,4 @@
-import { callManager, canvas, context, lineManager, player, pointManager, vehicleManager } from "./main";
+import { callManager, canvas, context, lineManager, player, pointManager, vehicleManager } from "./main.js";
 
 export class Game  { 
     loop() {

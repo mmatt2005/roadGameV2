@@ -1,5 +1,5 @@
-import { context } from "./main";
-import { Point } from "./point";
+import { context } from "./main.js";
+import { Point } from "./point.js";
 
 export class Line {
     constructor(point1: Point, point2: Point) {

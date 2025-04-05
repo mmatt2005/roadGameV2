@@ -1,4 +1,4 @@
-import { context, player } from "./main"
+import { context, player } from "./main.js"
 
 export class Player {
     constructor() { 

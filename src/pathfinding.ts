@@ -1,5 +1,6 @@
-import { lineManager, pointManager } from "./main";
-import { Point } from "./point";
+import { lineManager, pointManager } from "./main.js";
+import { Point } from "./point.js";
+
 export function getNeighborNodes(node: Point) { 
     let neighbors: Point[] = []
 
