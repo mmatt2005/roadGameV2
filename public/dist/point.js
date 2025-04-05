@@ -1,3 +1,4 @@
+import { POINT_SIZE } from "./constants.js";
 import { context } from "./main.js";
 import { uuidv4 } from "./utils.js";
 export class Point {
@@ -5,8 +6,8 @@ export class Point {
         this.x = 0;
         this.y = 0;
         this.color = "black";
-        this.width = 15;
-        this.height = 15;
+        this.width = POINT_SIZE;
+        this.height = POINT_SIZE;
         this.id = uuidv4();
     }
     setPosition(x, y) {

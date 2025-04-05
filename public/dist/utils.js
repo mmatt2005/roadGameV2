@@ -6,7 +6,7 @@ import { callManager, pointManager, vehicleManager } from "./main.js";
  * @param {Pick<Point, "x" | "y">} clickPosition where the player clicked on the canvas
  */
 export function getClosestGameObject(clickPosition) {
-    const gameObjects = [...pointManager.points, ...callManager.calls, ...vehicleManager.vehicles];
+    const gameObjects = [...callManager.calls, ...pointManager.points, ...vehicleManager.vehicles];
     const closestObject = gameObjects.sort((objectA, objectB) => {
         const objectADistance = Math.sqrt(Math.pow(clickPosition.x - objectA.x, 2) + Math.pow(clickPosition.y - objectA.y, 2));
         const objectBDistance = Math.sqrt(Math.pow(clickPosition.x - objectB.x, 2) + Math.pow(clickPosition.y - objectB.y, 2));

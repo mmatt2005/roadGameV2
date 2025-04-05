@@ -48,5 +48,11 @@ export default function PointUi({ point }: {
                 debug.debug_pathfinding()
             }}
         >Debug pathfinding</Button>
+
+        <Button
+            onClick={() => { 
+                debug.debug_createCallAtPoint(point)
+            }}
+        >Create call at point</Button>
     </div>
 }

@@ -1,5 +1,5 @@
 import { Call } from "./call.js";
-import { canvas, uiManager, vehicleManager } from "./main.js";
+import { callManager, canvas, lineManager, uiManager, vehicleManager } from "./main.js";
 import { getPath } from "./pathfinding.js";
 import { Point } from "./point.js";
 import { EmergencyVehicle } from "./emergencyVehicle.js";
@@ -59,5 +59,11 @@ export class Debug {
         path.forEach(point => { 
             point.setColor("yellow")
         })
+    }
+
+    async debug_createCallAtPoint(point: Point) { 
+        const call = callManager.createNewCall(point)
+        callManager.addCall(await call)
+
     }
 }

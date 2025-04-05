@@ -1,4 +1,3 @@
-import { Call } from './call.js'
 import { CallManager } from './callManager.js'
 import { UI_WIDTH } from './constants.js'
 import { createMap } from './createMap.js'
@@ -26,12 +25,6 @@ export const callManager = new CallManager()
 export const game = new Game()
 game.loop()
 
-// const call = new Call()
-// const { x, y } = callManager.createCallLocation()
-// call.setPosition(x, y)
-
-
-// callManager.addCall(call)
 
 export const uiManager = new UiManager()
 

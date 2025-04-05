@@ -1,14 +1,15 @@
+import { POINT_SIZE } from "./constants.js"
 import { context } from "./main.js"
 import { uuidv4 } from "./utils.js"
 
-
+export type Coordinate = {x: number, y: number}
 
 export class Point { 
     x: number = 0
     y: number = 0
     color: string = "black"
-    width: number = 15
-    height: number = 15
+    width: number = POINT_SIZE
+    height: number = POINT_SIZE
     id: string = uuidv4()
     
     setPosition(x: number, y: number) {
