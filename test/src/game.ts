@@ -1,4 +1,4 @@
-import { canvas, context, lineManager, player, pointManager } from "./main";
+import { callManager, canvas, context, lineManager, player, pointManager, vehicleManager } from "./main";
 
 export class Game  { 
     loop() {
@@ -12,5 +12,7 @@ export class Game  {
         player.draw()
         lineManager.draw()
         pointManager.draw()
+        vehicleManager.draw()
+        callManager.draw()
     }
 }

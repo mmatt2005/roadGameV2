@@ -1,4 +1,5 @@
 import { context } from "./main"
+import {v4 as uuidv4} from "uuid"
 
 export class Point { 
     x: number = 0
@@ -6,7 +7,8 @@ export class Point {
     color: string = "black"
     width: number = 15
     height: number = 15
-
+    id: string = uuidv4()
+    
     setPosition(x: number, y: number) {
         this.x = x
         this.y = y

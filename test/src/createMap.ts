@@ -1,14 +1,21 @@
+import { MAX_MAP_POINTS } from "./constants";
 import { Line } from "./line";
-import { lineManager, player, pointManager } from "./main";
+import { lineManager, pointManager } from "./main";
 import { Point } from "./point";
 
-const MAX_POINTS = 50
 
+export function getClosestPoint(startingPoint: Pick<Point, "x" | "y">): Point {
+    return pointManager.points.sort((pointA, pointB) => {
+        const pointADistance = Math.sqrt(Math.pow(startingPoint.x - pointA.x, 2) + Math.pow(startingPoint.y - pointA.y, 2))
+        const pointBDistance = Math.sqrt(Math.pow(startingPoint.x - pointB.x, 2) + Math.pow(startingPoint.y - pointB.y, 2))
+
+        if (pointADistance < pointBDistance) return -1
+        return 0
+    })[0]
+}
 
 export function createMap(points: Point[]) {
-    console.log("Creating map...")
-
-    if (points.length >= MAX_POINTS) {
+    if (points.length >= MAX_MAP_POINTS) {
         console.log("Reached base case...")
         return
     }
@@ -31,15 +38,7 @@ export function createMap(points: Point[]) {
         return Math.floor(Math.random() * (maxY - minY + 1) + minY)
     }
 
-    function getClosestPoint(startingPoint: Point): Point {
-        return pointManager.points.sort((pointA, pointB) => {
-            const pointADistance = Math.sqrt(Math.pow(startingPoint.x - pointA.x, 2) + Math.pow(startingPoint.y - pointA.y, 2))
-            const pointBDistance = Math.sqrt(Math.pow(startingPoint.x - pointB.x, 2) + Math.pow(startingPoint.y - pointB.y, 2))
 
-            if (pointADistance < pointBDistance) return -1
-            return 0
-        })[0]
-    }
 
     function wasPointGeneratedToCloseToAnother(generatedPoint: Point, closestPoint: Point): boolean {
         if (Math.abs(generatedPoint.x - closestPoint.x) < 100 && Math.abs(generatedPoint.y - closestPoint.y) < 100) {
