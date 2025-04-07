@@ -1,5 +1,5 @@
 import { Call } from "./call.js";
-import { lineManager } from "./main.js";
+import { events, lineManager } from "./main.js";
 import { Coordinate } from "./point.js";
 import createCall from "@/components/actions/createCall"
 export class CallManager {
@@ -7,9 +7,8 @@ export class CallManager {
 
     addCall(newCall: Call) {
         this.calls.push(newCall)
+        events.updateCallsUi()
     }
-
-    
 
     /**
      * 4/5/25 12:33pm
@@ -23,8 +22,8 @@ export class CallManager {
         const newCall = new Call()
         newCall.setPosition(position.x, position.y)
 
-        const aiCall = await createCall({ems: 1, fire: 1, police: 1}, "")
-        newCall.setDetails(aiCall)
+        // const aiCall = await createCall({ems: 1, fire: 1, police: 1}, "")
+        // newCall.setDetails(aiCall)
 
         return newCall
     }

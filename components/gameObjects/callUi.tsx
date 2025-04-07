@@ -1,8 +1,16 @@
+"use client"
 import { Call } from "@/public/dist/call"
+import { Button } from "../ui/button"
+import { useEffect } from "react"
+import { Vehicle } from "@/public/dist/vehicle"
+import { EmergencyVehicle } from "@/public/dist/emergencyVehicle"
 
-export default function CallUi({ call }: {
-    call: Call 
+export default function CallUi({ call, vehicles }: {
+    call: Call | null
+    vehicles: EmergencyVehicle[]
 }) {
+    if (!call) return <>call is null</>
+
     return <div className="">
         <h1>Call Ui</h1>
         <p>
@@ -10,5 +18,13 @@ export default function CallUi({ call }: {
                 JSON.stringify(call, null, 2)
             }
         </p>
+
+
+            <p>Attach Vehicle</p>
+            {
+                vehicles.map((vehicle, index) =>  <div key={vehicle.id} className="">
+                    {vehicle.name}
+                </div> )
+            }
     </div>
 }

@@ -1,12 +1,12 @@
 import { Call } from "./call.js";
-import { lineManager } from "./main.js";
-import createCall from "@/components/actions/createCall";
+import { events, lineManager } from "./main.js";
 export class CallManager {
     constructor() {
         this.calls = [];
     }
     addCall(newCall) {
         this.calls.push(newCall);
+        events.updateCallsUi();
     }
     /**
      * 4/5/25 12:33pm
@@ -19,8 +19,8 @@ export class CallManager {
     async createNewCall(position = lineManager.selectRandomPointOnLine()) {
         const newCall = new Call();
         newCall.setPosition(position.x, position.y);
-        const aiCall = await createCall({ ems: 1, fire: 1, police: 1 }, "");
-        newCall.setDetails(aiCall);
+        // const aiCall = await createCall({ems: 1, fire: 1, police: 1}, "")
+        // newCall.setDetails(aiCall)
         return newCall;
     }
     draw() {

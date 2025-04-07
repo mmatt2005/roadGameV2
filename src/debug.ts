@@ -1,5 +1,5 @@
 import { Call } from "./call.js";
-import { callManager, canvas, lineManager, uiManager, vehicleManager } from "./main.js";
+import { callManager, canvas, events, lineManager, vehicleManager } from "./main.js";
 import { getPath } from "./pathfinding.js";
 import { Point } from "./point.js";
 import { EmergencyVehicle } from "./emergencyVehicle.js";
@@ -25,11 +25,22 @@ export class Debug {
 
 
             if (closestGameObject instanceof Call) {
-                uiManager.setUiState("call", closestGameObject)
+                events.updateUi(
+                    {
+                        state: "call",
+                        selectedObject: closestGameObject
+                    }
+                )
             } else if (closestGameObject instanceof Point) {
-                uiManager.setUiState("point", closestGameObject)
+                events.updateUi({
+                    state: "point",
+                    selectedObject: closestGameObject
+                })
             } else if (closestGameObject instanceof Vehicle) {
-                uiManager.setUiState("vehicle", closestGameObject)
+                events.updateUi({
+                    state: "vehicle",
+                    selectedObject: closestGameObject
+                })
             }
 
         })
@@ -56,12 +67,12 @@ export class Debug {
 
 
 
-        path.forEach(point => { 
+        path.forEach(point => {
             point.setColor("yellow")
         })
     }
 
-    async debug_createCallAtPoint(point: Point) { 
+    async debug_createCallAtPoint(point: Point) {
         const call = callManager.createNewCall(point)
         callManager.addCall(await call)
 

@@ -1,8 +1,9 @@
-import { context } from "./main.js";
+import { context, vehicleManager } from "./main.js";
 import { Vehicle } from "./vehicle.js";
 export class EmergencyVehicle extends Vehicle {
     constructor(type) {
         super();
+        this.name = "";
         this.color = "0,0,0";
         this.isLightsOn = false;
         this.type = type;
@@ -19,6 +20,8 @@ export class EmergencyVehicle extends Vehicle {
         else if (this.type === "ems") {
             this.color = "255,255,255";
         }
+        // Set the name of the vehicle ex "police 1"
+        this.name = type + (vehicleManager.getNumberOfEmergencyVehicles(type) + 1);
     }
     /**
      * 4/5/25 11:06

@@ -1,36 +1,69 @@
 "use client"
 import CallUi from "@/components/gameObjects/callUi";
+import DefaultUi from "@/components/gameObjects/defaultUi";
 import EmergencyVehicleUi from "@/components/gameObjects/emergencyVehicleUi";
 import PointUi from "@/components/gameObjects/pointUi";
 import { Call } from "@/public/dist/call";
 import { UI_WIDTH } from "@/public/dist/constants";
+import { EmergencyVehicle } from "@/public/dist/emergencyVehicle";
 import { Point } from "@/public/dist/point";
-import { UiManager } from "@/public/dist/uiManager";
-import { EmergencyVehicle } from "@/src/emergencyVehicle";
-import { NewUiState, UiState, UiStateObject } from "@/src/uiManager";
+import { UiState } from "@/src/events";
+import { setCanvas } from "@/public/dist/main";
 
-import { ReactElement, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
+
 export default function UiMain() {
 
-
-    const [ui, setUi] = useState<NewUiState>({ uiState: "default", object: "default" })
+    const [ui, setUi] = useState<UiState>({ state: "default", selectedObject: "default" })
+    const [calls, setCalls] = useState<Call[]>([])
+    const [vehicles, setVehicles] = useState<EmergencyVehicle[]>([])
 
     useEffect(() => {
         // Only run this code on the client
         import("@/public/dist/main.js").then(mod => {
-            const uiManagerInstance = mod.uiManager
+            const events = mod.events
 
 
-            function handleStateChange(event: NewUiState) {
-                setUi(event)
+            function handleCallsUpdate(newCalls: Call[]) {
+                setCalls(prev => ([...newCalls]))
             }
-            uiManagerInstance.on("uiStateChange", handleStateChange)
+
+            function handleVehiclesUpdate(newVehicles: EmergencyVehicle[]) {
+                setVehicles(prev => ([...newVehicles]))
+            }
+
+            function handleUiUpdate(newUi: UiState) {
+                setUi(prev => ({ ...newUi }))
+            }
+
+            events.on("updateUi_calls", handleCallsUpdate)
+            events.on("updateUi", handleUiUpdate)
+            events.on("updateUi_vehicles", handleVehiclesUpdate)
+
 
             return () => {
-                uiManagerInstance.off("uiStateChange", handleStateChange)
+                events.off("updateUi_calls", handleCallsUpdate)
+                events.off("updateUi", handleUiUpdate)
+                events.off("updateUi_vehicles", handleVehiclesUpdate)
             }
         })
+
+        setCanvas()
     }, [])
+
+
+    /**
+     * @description this will always return the most recent version of a call object
+     *
+     * @param {Call} selectedCall 
+     * @returns {(Call | null)} 
+     */
+    function findCall(selectedCall: Call): Call | null {
+
+        console.log(calls)
+        return calls.find(({ id }) => id === selectedCall.id) || null
+    }
 
 
 
@@ -40,13 +73,13 @@ export default function UiMain() {
     >
         {
             ui && (
-                ui.uiState === "call" ? (
-                    <CallUi call={ui.object as Call} />
-                ) : ui.uiState === "point" ? (
-                    <PointUi point={ui.object as Point}/>
-                ) : ui.uiState === "vehicle" ? (
-                    <EmergencyVehicleUi emergencyVehicle={ui.object as EmergencyVehicle}/>
-                ) : "default"
+                ui.state === "call" ? (
+                    <CallUi call={findCall((ui.selectedObject as Call))} vehicles={vehicles} />
+                ) : ui.state === "point" ? (
+                    <PointUi point={ui.selectedObject as Point} />
+                ) : ui.state === "vehicle" ? (
+                    <EmergencyVehicleUi emergencyVehicle={ui.selectedObject as EmergencyVehicle} />
+                ) : <DefaultUi/>
             )
         }
     </div>

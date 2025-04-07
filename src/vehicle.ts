@@ -1,5 +1,6 @@
 import { context } from "./main.js"
 import { Point } from "./point.js"
+import { uuidv4 } from "./utils.js"
 
 export class Vehicle {
     x: number = 0
@@ -7,6 +8,7 @@ export class Vehicle {
     width: number = 25
     height: number = 25
     color: string = "red"
+    id: string = uuidv4()
 
     movingTo: Point[] | null = null
 

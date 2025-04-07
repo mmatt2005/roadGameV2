@@ -1,4 +1,5 @@
 import { context } from "./main.js";
+import { uuidv4 } from "./utils.js";
 export class Vehicle {
     constructor() {
         this.x = 0;
@@ -6,6 +7,7 @@ export class Vehicle {
         this.width = 25;
         this.height = 25;
         this.color = "red";
+        this.id = uuidv4();
         this.movingTo = null;
     }
     setPosition(x, y) {

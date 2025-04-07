@@ -1,5 +1,5 @@
 import { Call } from "./call.js";
-import { callManager, canvas, uiManager, vehicleManager } from "./main.js";
+import { callManager, canvas, events, vehicleManager } from "./main.js";
 import { getPath } from "./pathfinding.js";
 import { Point } from "./point.js";
 import { EmergencyVehicle } from "./emergencyVehicle.js";
@@ -19,13 +19,22 @@ export class Debug {
             if (!closestGameObject)
                 return;
             if (closestGameObject instanceof Call) {
-                uiManager.setUiState("call", closestGameObject);
+                events.updateUi({
+                    state: "call",
+                    selectedObject: closestGameObject
+                });
             }
             else if (closestGameObject instanceof Point) {
-                uiManager.setUiState("point", closestGameObject);
+                events.updateUi({
+                    state: "point",
+                    selectedObject: closestGameObject
+                });
             }
             else if (closestGameObject instanceof Vehicle) {
-                uiManager.setUiState("vehicle", closestGameObject);
+                events.updateUi({
+                    state: "vehicle",
+                    selectedObject: closestGameObject
+                });
             }
         });
     }

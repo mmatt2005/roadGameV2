@@ -1,4 +1,4 @@
-import { context } from "./main.js"
+import { context, vehicleManager } from "./main.js"
 import { Vehicle } from "./vehicle.js"
 
 export type EmergencyVehicleType = "police" | "fire" | "ems"
@@ -19,7 +19,12 @@ export class EmergencyVehicle extends Vehicle {
         } else if (this.type === "ems") {
             this.color = "255,255,255"
         }
+
+        // Set the name of the vehicle ex "police 1"
+        this.name = type + (vehicleManager.getNumberOfEmergencyVehicles(type) + 1)
     }
+
+    name: string = ""
 
     type: EmergencyVehicleType
     color: string = "0,0,0"
