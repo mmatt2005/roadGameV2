@@ -21,6 +21,7 @@ export let vehicleManager: VehicleManager
 export let game: Game
 export let debug: Debug
 
+// Filler commit 4/8/25
 
 export function setCanvas() { 
     canvas = document.querySelector("canvas")!
