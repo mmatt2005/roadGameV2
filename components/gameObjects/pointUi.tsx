@@ -4,20 +4,11 @@ import { Button } from "../ui/button"
 import { useEffect, useState } from "react"
 import { Debug } from "@/public/dist/debug"
 
-export default function PointUi({ point }: {
-    point: Point
+export default function PointUi({ point, debug }: {
+    point: Point,
+    debug: Debug | null
 }) {
 
-    const [debug, setDebug] = useState<Debug | null>(null)
-
-    useEffect(() => {
-        // Only run this code on the client
-        import("@/public/dist/main.js").then(mod => {
-            const debugInstance: Debug = mod.debug
-
-            setDebug(debugInstance)
-        })
-    }, [])
 
 
     if (!debug) return <>No debug object...</>

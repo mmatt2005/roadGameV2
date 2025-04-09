@@ -27,8 +27,8 @@ export class VehicleManager {
     }
 
     addVehicle(newVehicle: Vehicle) {
-        this.vehicles.push(newVehicle)
-        events.updateVehiclesUi()
+        // this.vehicles.push(newVehicle)
+        // events.updateVehiclesUi()
     }
 
     

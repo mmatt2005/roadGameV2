@@ -5,16 +5,20 @@ import EmergencyVehicleUi from "@/components/gameObjects/emergencyVehicleUi";
 import PointUi from "@/components/gameObjects/pointUi";
 import { Call } from "@/public/dist/call";
 import { UI_WIDTH } from "@/public/dist/constants";
+import { Debug } from "@/public/dist/debug";
 import { EmergencyVehicle } from "@/public/dist/emergencyVehicle";
 import { Point } from "@/public/dist/point";
+import { VehicleManager } from "@/public/dist/vehicleManager";
 import { UiState } from "@/src/events";
-import { setCanvas } from "@/public/dist/main";
 
 import { useEffect, useState } from "react";
 
 
 export default function UiMain() {
 
+
+    const [debug, setDebug] = useState<Debug | null>(null)
+    const [vehicleManager, setVehicleManager] = useState<VehicleManager | null>(null)
     const [ui, setUi] = useState<UiState>({ state: "default", selectedObject: "default" })
     const [calls, setCalls] = useState<Call[]>([])
     const [vehicles, setVehicles] = useState<EmergencyVehicle[]>([])
@@ -30,12 +34,17 @@ export default function UiMain() {
             }
 
             function handleVehiclesUpdate(newVehicles: EmergencyVehicle[]) {
-                setVehicles(prev => ([...newVehicles]))
+                // setVehicles(prev => ([...newVehicles]))
             }
 
             function handleUiUpdate(newUi: UiState) {
                 setUi(prev => ({ ...newUi }))
             }
+
+            console.log(document.querySelector("canvas"))
+
+            setDebug(prev => (mod.debug))
+            setVehicleManager(prev => (mod.vehicleManager))
 
             events.on("updateUi_calls", handleCallsUpdate)
             events.on("updateUi", handleUiUpdate)
@@ -49,7 +58,6 @@ export default function UiMain() {
             }
         })
 
-        setCanvas()
     }, [])
 
 
@@ -76,10 +84,10 @@ export default function UiMain() {
                 ui.state === "call" ? (
                     <CallUi call={findCall((ui.selectedObject as Call))} vehicles={vehicles} />
                 ) : ui.state === "point" ? (
-                    <PointUi point={ui.selectedObject as Point} />
+                    <PointUi point={ui.selectedObject as Point} debug={debug} />
                 ) : ui.state === "vehicle" ? (
                     <EmergencyVehicleUi emergencyVehicle={ui.selectedObject as EmergencyVehicle} />
-                ) : <DefaultUi/>
+                ) : ui.state === "default" && <p></p>
             )
         }
     </div>

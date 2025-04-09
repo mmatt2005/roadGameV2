@@ -1,5 +1,5 @@
 import { EmergencyVehicle } from "./emergencyVehicle.js";
-import { events, lineManager } from "./main.js";
+import { lineManager } from "./main.js";
 export class VehicleManager {
     constructor() {
         this.vehicles = [];
@@ -23,8 +23,8 @@ export class VehicleManager {
         }, 10);
     }
     addVehicle(newVehicle) {
-        this.vehicles.push(newVehicle);
-        events.updateVehiclesUi();
+        // this.vehicles.push(newVehicle)
+        // events.updateVehiclesUi()
     }
     /**
      * 4/7/25
